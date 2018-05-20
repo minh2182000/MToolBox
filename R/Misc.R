@@ -18,3 +18,30 @@ Misc.PrintLinearEquation = function(model, round = 3){
 Misc.setwdClipboard = function(){
   setwd(readClipboard())
 }
+
+
+#' Install commonly used packages
+#' To get a newly installed R version ready
+#' @export
+Misc.InstallCommon = function(Packages = c("caret",
+                                           "randomForest",
+                                           "e1071",
+                                           "ggplot2",
+                                           "plotly",
+                                           "shiny",
+                                           "rsconnect",
+                                           "xlsx",
+                                           "nnet",
+                                           "sqldf",
+                                           "devtools",
+                                           "roxygen2"
+                                           ))
+{
+  Install = function(PackageName){
+    if (!PackageName %in% installed.packages()[,1])
+      install.packages(PackageName)
+  }
+  for (Package in Packages){
+    Install(Package)
+  }
+}
