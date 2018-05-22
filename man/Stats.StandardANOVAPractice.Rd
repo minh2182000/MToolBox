@@ -2,8 +2,7 @@
 % Please edit documentation in R/Stats.R
 \name{Stats.StandardANOVAPractice}
 \alias{Stats.StandardANOVAPractice}
-\title{Workflow of standard Analysis-of-variabce practice
-We test for difference in risk factors between the cohort groups. If the data passes both normality check and homogeneity check, we used one-way ANOVA test. If the data passes normality check but fails homogeneity check, we used Welch's one-way test. If the data fails normality check, we used Kruskal-Wallis test. Then, we used Tukey test to discover the pairs of cohorts that have significant difference.}
+\title{Workflow of standard Analysis-of-variace practice}
 \usage{
 Stats.StandardANOVAPractice(y, x, observe = TRUE, Thres.Normality = 0.05,
   Thres.Homogeneity = 0.05, Thres.Decision = 0.05)
@@ -16,6 +15,5 @@ Stats.StandardANOVAPractice(y, x, observe = TRUE, Thres.Normality = 0.05,
 \item{observe}{if TRUE, wait for user to press enter through each step}
 }
 \description{
-Workflow of standard Analysis-of-variabce practice
 We test for difference in risk factors between the cohort groups. If the data passes both normality check and homogeneity check, we used one-way ANOVA test. If the data passes normality check but fails homogeneity check, we used Welch's one-way test. If the data fails normality check, we used Kruskal-Wallis test. Then, we used Tukey test to discover the pairs of cohorts that have significant difference.
 }
