@@ -15,5 +15,5 @@ Stats.StandardANOVAPractice(y, x, observe = TRUE, Thres.Normality = 0.05,
 \item{observe}{if TRUE, wait for user to press enter through each step}
 }
 \description{
-We test for difference in risk factors between the cohort groups. If the data passes both normality check and homogeneity check, we used one-way ANOVA test. If the data passes normality check but fails homogeneity check, we used Welch's one-way test. If the data fails normality check, we used Kruskal-Wallis test. Then, we used Tukey test to discover the pairs of cohorts that have significant difference.
+We test for difference in risk factors between the cohort groups. If the data passes both normality check and homogeneity check, we used one-way ANOVA test. If the data passes normality check but fails homogeneity check, we used Welch's one-way test. If the data fails normality check, we used Kruskal-Wallis test. Then, we use Tukey test to discover the pairs of cohorts that have significant difference.
 }
