@@ -2,12 +2,20 @@
 % Please edit documentation in R/Plot.R
 \name{Plot.VisualizeSupervise}
 \alias{Plot.VisualizeSupervise}
-\title{Visualize High-dimensional data in a 3D scatter plot
-Using PCA to visualize a classification data at 2D or 3D}
+\title{Visualize High-dimensional data in a 3D scatter plot}
 \usage{
 Plot.VisualizeSupervise(formula, data, dim = NULL)
 }
+\arguments{
+\item{formula}{regression or classification formula. If classification, the left hand side must be a factor or character. If regression, the left hand side must be numeric.}
+
+\item{data}{Data Frame or matrix for the formula}
+
+\item{dim}{Dimmension to be plotted. If null, will plot 2D if only 2 predictors, 3D otherwise.}
+}
+\value{
+A list of: \code{Plot}: the plot, \code{VarExplained}: proportion of variance explained by each PC, \code{TotalVarExplained}: total proportion of variance explained by PCs
+}
 \description{
-Visualize High-dimensional data in a 3D scatter plot
-Using PCA to visualize a classification data at 2D or 3D
+Use dimension reduction (Principle Component Analysis) to visualize a classification/regression data in a 2D or 3D plot
 }

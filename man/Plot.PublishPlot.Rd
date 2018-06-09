@@ -4,22 +4,22 @@
 \alias{Plot.PublishPlot}
 \title{Save Publication-quality plot}
 \usage{
-Plot.PublishPlot(plot, res = 400, height = 1500, width = 3000,
+Plot.PublishPlot(plot, res = 600, height = 2000, width = 4000,
   dir = getwd(), filename = "Plot Output")
 }
 \arguments{
 \item{plot}{any plot or ggplot object}
 
-\item{res}{resolution}
+\item{res}{resolution (dpi)}
 
-\item{height}{height}
+\item{height}{height (in pixels)}
 
-\item{width}{width}
+\item{width}{width (in pixels)}
 
 \item{dir}{saving directory}
 
 \item{filename}{file name}
 }
 \description{
-Save Publication-quality plot
+Savev a plot in a high-quality jpeg file for publication
 }
