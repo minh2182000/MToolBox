@@ -28,7 +28,7 @@ Plot.PublishPlot = function(plot,  res = 600, height = 2000, width = 4000, dir =
 #' @return A list of: \code{Plot}: the plot, \code{VarExplained}: proportion of variance explained by each PC, \code{TotalVarExplained}: total proportion of variance explained by PCs
 #' @export
 Plot.VisualizeSupervise = function(formula, data, dim = NULL){
-  y = unlist(data[all.vars(formula)[1]])
+  y = data[all.vars(formula)[1]]
   x = model.matrix(formula, data); x = x[,colnames(x) != "(Intercept)"]
   if (is.null(dim)) dim = min(3, ncol(x))
   
@@ -36,7 +36,7 @@ Plot.VisualizeSupervise = function(formula, data, dim = NULL){
   PCA = prcomp(x)
   
   # plot
-  if (is.factor(y) | is.character(y)){
+  if (is.factor(y[[1]]) | is.character(y)){
     # Classfication
     VarExplained = (PCA$sdev^2/sum(PCA$sdev^2))[1:dim]
     PCs = PCA$x[,1:dim]
