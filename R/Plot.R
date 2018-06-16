@@ -28,7 +28,7 @@ Plot.PublishPlot = function(plot,  res = 600, height = 2000, width = 4000, dir =
 #' @return A list of: \code{Plot}: the plot, \code{VarExplained}: proportion of variance explained by each PC, \code{TotalVarExplained}: total proportion of variance explained by PCs
 #' @export
 Plot.VisualizeSupervise = function(formula, data, dim = NULL){
-  y = data[all.vars(formula)[1]]
+  y = unlist(data[all.vars(formula)[1]])
   x = model.matrix(formula, data); x = x[,colnames(x) != "(Intercept)"]
   if (is.null(dim)) dim = min(3, ncol(x))
   
