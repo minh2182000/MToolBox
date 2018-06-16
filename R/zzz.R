@@ -17,9 +17,9 @@
   }
 
   if (!get_os() == "linux")
-    if (! "car" %in% rownames(installed.packages()))
+    if (! "installr" %in% rownames(installed.packages()))
       install.packages("installr")
-  if (! "installr" %in% rownames(installed.packages()))
+  if (! "car" %in% rownames(installed.packages()))
     install.packages("car")
   if (! "mctest" %in% rownames(installed.packages()))
     install.packages("mctest")
