@@ -18,9 +18,9 @@
 
   if (!get_os() == "linux")
     if (! "car" %in% rownames(installed.packages()))
-      install.packages("car")
+      install.packages("installr")
   if (! "installr" %in% rownames(installed.packages()))
-    install.packages("installr")
+    install.packages("car")
   if (! "mctest" %in% rownames(installed.packages()))
     install.packages("mctest")
   if (! "plotly" %in% rownames(installed.packages()))
