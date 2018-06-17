@@ -48,6 +48,7 @@
     tolower(os)
   }
   if (!get_os() == "linux"){
+    library(installr)
     Newer_version = installr::check.for.updates.R(notify_user = FALSE)
     if (Newer_version){
       readline("There is a newer version of R, would you like to update R? (y/n) ") -> answer
@@ -56,5 +57,5 @@
 
     }
   }
-  
+  library(plotly); library(mctest); library(car)
 }
