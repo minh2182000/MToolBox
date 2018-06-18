@@ -94,7 +94,7 @@ Plot.ClusterElbow = function(Data, kmax = 8){
 				aes(x = k, y = WSS)) +
 			geom_line() + 
 			xlab("Number of Clusters") + 
-			ylab("Within-Group Sum of Squares")
-  
+			ylab("Within-Group Sum of Squares") + 
+      scale_x_continuous(breaks = 1:kmax)
   return(Plot)
 }
