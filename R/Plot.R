@@ -71,3 +71,30 @@ Plot.VisualizeSupervise = function(formula, data, dim = NULL){
   
   return(list(Plot = Plot, VarExplained = VarExplained, TotalVarExplained = sum(VarExplained)))
 }
+
+
+wss <- function(d) {
+  sum(scale(d, scale = FALSE)^2)
+}
+wrap <- function(i, hc, x) {
+  cl <- cutree(hc, i)
+  spl <- split(x, cl)
+  wss <- sum(sapply(spl, wss))
+  wss
+}
+
+#' Plot the Elbow curve for clustering
+#' @description use hierachical clustering to plot the within-group variance against number of clusters
+#' @export
+Plot.ClusterElbow = function(Data, kmax = 8){
+  WSS = rep(NA, kmax)
+  hc = hclust(dist(Data), method = "ward.D2")  # cluster by ward's method, squared euclidean distance
+  res <- sapply(seq.int(1, kmax), wrap, h = hc, x = Data)
+  Plot = ggplot(data.frame(k = 1:kmax, WSS = res),
+				aes(x = k, y = WSS)) +
+			geom_line() + 
+			xlab("Number of Clusters") + 
+			ylab("Within-Group Sum of Squares")
+  
+  return(Plot)
+}
