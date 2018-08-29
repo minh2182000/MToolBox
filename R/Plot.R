@@ -10,7 +10,7 @@
 
 Plot.PublishPlot = function(plot,  res = 600, height = 2000, width = 4000, dir = getwd(), filename = "Plot Output"){
   jpeg(filename = paste0(dir, "/", filename, ".jpg"), res =  res, height = height, width = width)
-  plot; dev.off()
+  print(plot); dev.off()
   graphics.off()
 }
 
@@ -97,4 +97,59 @@ Plot.ClusterElbow = function(Data, kmax = 8){
 			ylab("Within-Group Sum of Squares") + 
       scale_x_continuous(breaks = 1:kmax)
   return(Plot)
+}
+
+
+#' Diagnostics for Logistic Regression
+#' @description compute VIF and graph predictor-log(odds) relationships, graph outliers, and residual plot
+#' @import tidyverse
+#' @import ggplot2
+#' @import broom
+#' @export
+Plot.LogisticRegDiag = function(Model){
+  if (! "glm" %in% class(Model)) stop("Not Logistic regression model")
+  
+  # multi colinearity
+  Out.VIF = car::vif(Model)
+  
+  # graph predictor-log(oods)
+  probs = predict(Model, type = "response")
+
+  plotdata <- Model$data %>%
+    dplyr::select_if(is.numeric) 
+  target = all.vars(Model$formula)[1] 
+  if (target %in% colnames(plotdata))
+    plotdata = select(plotdata, -target)# remove target variable
+  
+  predictors <- colnames(plotdata)
+  plotdata = plotdata %>%
+    mutate(logit = log(probs/(1-probs))) %>%
+    gather(key = "predictors", value = "predictor.value", -logit)
+  Out.RelationshipPlot = ggplot(plotdata, aes(logit, predictor.value))+
+    geom_point(size = 0.5, alpha = 0.5) +
+    geom_smooth(method = "auto") + 
+    theme_bw() + 
+    facet_wrap(~predictors, scales = "free_y") +
+    xlab("Log of odds") + 
+    ylab("Predictor value")
+  
+  # influential points
+  plot.new()
+  plot(Model, which = 4, id.n = 3) 
+  Out.influential = recordPlot()
+  dev.off()
+  
+  # Residual plots
+  modelData = broom::augment(Model) %>% 
+    mutate(index = 1:n()) 
+  Out.Residual = ggplot(modelData, aes(index, .std.resid)) + 
+    geom_point(aes(color = Model$y), alpha = .5) +
+    theme_bw()  
+  
+  return(list(
+    VIF = Out.VIF,
+    RelationshipPlot = Out.RelationshipPlot,
+    InfluentialPlot = Out.influential,
+    ResidualPlot = Out.Residual
+  ))
 }
